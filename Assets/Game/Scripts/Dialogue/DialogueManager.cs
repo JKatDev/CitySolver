@@ -120,12 +120,12 @@ public class DialogueManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
             {
-                selectedChoiceIndex = Mathf.Min(selectedChoiceIndex + 1, currentStory.currentChoices.Count - 1);
+                selectedChoiceIndex = Mathf.Min(selectedChoiceIndex - 1, currentStory.currentChoices.Count + 1);
                 UpdateChoiceSelection();
             }
             else if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W))
             {
-                selectedChoiceIndex = Mathf.Max(selectedChoiceIndex - 1, 0);
+                selectedChoiceIndex = Mathf.Max(selectedChoiceIndex + 1, 0);
                 UpdateChoiceSelection();
             }
 
