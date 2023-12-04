@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6708526600845158580}
   - component: {fileID: 5213367824738889996}
-  - component: {fileID: 2214730643590404671}
+  - component: {fileID: 2786054925537898335}
   m_Layer: 0
   m_Name: DialogueTrigger
   m_TagString: Untagged
@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 428426354147444005}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -201.323, y: -116.089, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5122685459117097727}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &5213367824738889996
 BoxCollider2D:
@@ -41,6 +41,7 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 428426354147444005}
   m_Enabled: 1
+  serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -64,7 +65,8 @@ BoxCollider2D:
     m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
   m_Offset: {x: 0.03359914, y: 0.29964745}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -75,10 +77,9 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
   m_Size: {x: 2.3677392, y: 1.5992949}
   m_EdgeRadius: 0
---- !u!114 &2214730643590404671
+--- !u!114 &2786054925537898335
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -87,15 +88,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 428426354147444005}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9216a56a3cdaf00418cc4bdcd39f73d1, type: 3}
+  m_Script: {fileID: 11500000, guid: 3857564af63cbfb42ae9934c9a7eb4ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   visualCue: {fileID: 3364010680974441028}
-  inkJSON: {fileID: 4900000, guid: b89712e84d44d7e41bb422fed5579a5e, type: 3}
-  KnotName: CatFirstText
-  npcTypingSpeed: 0.01
+  inkJSON: {fileID: 4900000, guid: 5a3190c03a9928f4981ba0370b62325b, type: 3}
+  KnotName: DinoFirstText
+  npcTypingSpeed: 0.05
   npcVoicePitch: 2.5
-  npcBeepFrequency: 0.08
+  npcBeepFrequency: 3
 --- !u!1 &3364010680974441028
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,13 +121,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3364010680974441028}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -201.32, y: -115.03, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5122685459117097727}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2681850927484751032
 SpriteRenderer:
@@ -204,13 +205,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3476160596337284892}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -201.33, y: -116.096, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5122685459117097727}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1543154757228423759
 SpriteRenderer:
@@ -287,6 +288,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5931013634993575168}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 206.48534, y: 113.845, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -296,5 +298,4 @@ Transform:
   - {fileID: 6708526600845158580}
   - {fileID: 6227006277114580993}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

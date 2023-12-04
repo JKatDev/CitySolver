@@ -96,14 +96,13 @@ public class DialogueManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log($"Dialogue playing: {dialogueIsPlaying}, Waiting for choice: {isWaitingForChoiceToBeMade}");
-
         if (!dialogueIsPlaying)
         {
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space))
+        // Pressing space should only continue the story if a choice is not being waited on.
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             if (isTyping)
             {
@@ -113,13 +112,10 @@ public class DialogueManager : MonoBehaviour
             {
                 ContinueStory();
             }
-            else
-            {
-                MakeChoice(selectedChoiceIndex);
-            }
+            // Do not include an else statement here, as we don't want Space to select a choice
         }
 
-        // If choices are being waited on, listen for arrow key inputs.
+        // Use arrow keys to navigate choices
         if (isWaitingForChoiceToBeMade)
         {
             if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
@@ -132,8 +128,15 @@ public class DialogueManager : MonoBehaviour
                 selectedChoiceIndex = Mathf.Max(selectedChoiceIndex - 1, 0);
                 UpdateChoiceSelection();
             }
+
+            // Use the Enter key to select a choice when choices are being waited on.
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                MakeChoice(selectedChoiceIndex);
+            }
         }
     }
+
 
     private void UpdateChoiceSelection()
     {
