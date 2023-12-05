@@ -1,49 +1,79 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Utils.Singleton;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : Singleton<PlayerController>
 {
-    public float moveSpeed = 5f;
-    public Transform movePoint;
+    [Header("Movement")]
+    [SerializeField] float moveSpeed = 5f;
+    [SerializeField] Transform movePoint;
 
-    private bool canMove = true; // Flag to control the player's movement
+    private const float initialPosX = 0.5f;
+    private const float stepMovement = 1f;
+    private bool canMove = true; // Flag to control the player's movement on update
+    private bool isFrozen = false; // Flag to control if player is frozen in place temporarely or not
 
-    public void SetCanMove(bool value)
+    void Awake()
     {
-        canMove = value;
+        movePoint.position = new Vector2(initialPosX, 0); // Set movepoint initial position
+        transform.position = movePoint.position; // Set player initial position
+        movePoint.parent = null; // Make movepoint parent null so it doesn't follow player
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        movePoint.parent = null;
-        // Snap movePoint to grid
-        movePoint.position = new Vector3(Mathf.Round(transform.position.x), Mathf.Round(transform.position.y), Mathf.Round(transform.position.z));
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        // Move the player towards the movePoint at each frame
-        transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
+        PlayerMovement();
+    }
 
-        // If the player is close enough to the movePoint and canMove is true, process input
-        if (Vector3.Distance(transform.position, movePoint.position) <= .05f && canMove)
+    #region Movement
+
+    void PlayerMovement()
+    {
+        if (transform.position != movePoint.position)
+        {
+            // Move the player towards the movePoint at each frame
+            transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
+        }
+        else
+        {
+            canMove = true;
+        }
+
+        // If the player is permitted to move, retrieves input and moves horizontally and vertically
+        if (canMove && !isFrozen)
         {
             float horizontal = Input.GetAxisRaw("Horizontal");
             float vertical = Input.GetAxisRaw("Vertical");
 
-            // If there's horizontal input, move horizontally
-            if (Mathf.Abs(horizontal) == 1f)
+            if (horizontal != 0 && vertical != 0)
             {
-                movePoint.position += new Vector3(horizontal, 0f, 0f);
+                movePoint.position += new Vector3(stepMovement * (horizontal < 0 ? -1 : 1), stepMovement * (vertical < 0 ? -1 : 1), 0);
+                canMove = false;
+
             }
-            // Else if there's vertical input, move vertically
-            else if (Mathf.Abs(vertical) == 1f)
+            else if (horizontal != 0)
             {
-                movePoint.position += new Vector3(0f, vertical, 0f);
+                movePoint.position += new Vector3(stepMovement * (horizontal < 0 ? -1 : 1), 0, 0);
+                canMove = false;
+            }
+            else if (vertical != 0)
+            {
+                movePoint.position += new Vector3(0, stepMovement * (vertical < 0 ? -1 : 1), 0);
+                canMove = false;
             }
         }
     }
+
+    #endregion
+
+    #region SET
+
+    public void SetIsFrozen(bool value)
+    {
+        isFrozen = value;
+    }
+
+    #endregion
+
 }

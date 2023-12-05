@@ -5,8 +5,9 @@ using TMPro;
 using Ink.Runtime;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Utils.Singleton;
 
-public class DialogueManager : MonoBehaviour
+public class DialogueManager : Singleton<DialogueManager>
 {
     [Header("Dialogue UI")]
     [SerializeField] private GameObject dialoguePanel;
@@ -14,7 +15,6 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI displayNameText;
     [SerializeField] private Animator portraitAnimator;
     private Animator layoutAnimator;
-
 
     [Header("Choices UI")]
     [SerializeField] private Button[] choiceButtons;
@@ -29,11 +29,6 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private AudioClip[] voiceClips;
     [SerializeField] private float voicePitch = 1.0f;
     [SerializeField] private float beepFrequency = 1.0f;
-
-
-    [Header("Player Control")]
-    [SerializeField] private PlayerController playerController;
-
     [SerializeField] private bool stopAudioSource;
 
     public bool ifSetUpStory = false;  // To determine if the story is set up or not
@@ -45,28 +40,13 @@ public class DialogueManager : MonoBehaviour
     private Story currentStory;
     public bool dialogueIsPlaying { get; private set; }
 
-    private bool isTyping; // New field to track typing state
+    private bool isTyping; 
 
     private bool isWaitingForChoiceToBeMade = false;
 
-    private static DialogueManager instance;
-
     private int selectedChoiceIndex = 0;
 
-    private void Awake()
-    {
-        if (instance != null)
-        {
-            Debug.LogWarning("Found more than one Dialogue Manager in the scene");
-            return;
-        }
-        instance = this;
-    }
-
-    public static DialogueManager GetInstance()
-    {
-        return instance;
-    }
+    private PlayerController playerController => PlayerController.I;
 
     private void Start()
     {
@@ -173,7 +153,7 @@ public class DialogueManager : MonoBehaviour
         // Freeze the player movement
         if (playerController != null)
         {
-            playerController.SetCanMove(false);
+            playerController.SetIsFrozen(false);
         }
 
         currentStory.ChoosePathString(KnotName);
@@ -189,7 +169,7 @@ public class DialogueManager : MonoBehaviour
         // Unfreeze the player movement
         if (playerController != null)
         {
-            playerController.SetCanMove(true);
+            playerController.SetIsFrozen(true);
         }
 
         dialogueIsPlaying = false;

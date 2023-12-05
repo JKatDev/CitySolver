@@ -16,10 +16,9 @@ public class DialogueTrigger : MonoBehaviour
     [SerializeField] private float npcVoicePitch = 1.0f;   // Default voice pitch for the NPC
     [SerializeField] private float npcBeepFrequency = 1.0f;   // Default beep frequency for the NPC
 
-    
-
-
     private bool playerInRange;
+
+    private DialogueManager _dialogueManager => DialogueManager.I;
 
     private void Awake()
     {
@@ -34,7 +33,7 @@ public class DialogueTrigger : MonoBehaviour
 
     private void HandlePlayerInput()
     {
-        if (playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying)
+        if (playerInRange && !_dialogueManager.dialogueIsPlaying)
         {
             visualCue.SetActive(true);
 
@@ -43,12 +42,12 @@ public class DialogueTrigger : MonoBehaviour
             {
                 // Pass both typing speed and voice pitch to the DialogueManager
                 // Inside the HandlePlayerInput() method where you call EnterDialogueMode
-                if (DialogueManager.GetInstance().ifSetUpStory == false)
+                if (_dialogueManager.ifSetUpStory == false)
                 {
-                    DialogueManager.GetInstance().SetUpStory(inkJSON, npcTypingSpeed, npcVoicePitch, npcBeepFrequency);
-                    DialogueManager.GetInstance().ifSetUpStory = true;
+                    _dialogueManager.SetUpStory(inkJSON, npcTypingSpeed, npcVoicePitch, npcBeepFrequency);
+                    _dialogueManager.ifSetUpStory = true;
                 }
-                DialogueManager.GetInstance().StartDialogue(KnotName);
+                _dialogueManager.StartDialogue(KnotName);
             }
         }
         else
