@@ -92,11 +92,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualCue: {fileID: 3364010680974441028}
-  inkJSON: {fileID: 4900000, guid: 5a3190c03a9928f4981ba0370b62325b, type: 3}
-  KnotName: DinoFirstText
+  inkJSON: {fileID: 4900000, guid: 3da113a40ec22d04e93bd39df595c35a, type: 3}
+  KnotName: GeroldFirstText
   npcTypingSpeed: 0.05
   npcVoicePitch: 2.5
-  npcBeepFrequency: 3
+  npcBeepFrequency: 1
 --- !u!1 &3364010680974441028
 GameObject:
   m_ObjectHideFlags: 0
