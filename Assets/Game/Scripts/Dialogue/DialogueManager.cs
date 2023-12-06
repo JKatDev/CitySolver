@@ -48,6 +48,8 @@ public class DialogueManager : Singleton<DialogueManager>
 
     private PlayerController playerController => PlayerController.I;
 
+
+
     private void Start()
     {
         dialogueIsPlaying = false;
